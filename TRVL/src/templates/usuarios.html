@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuários Cadastrados</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <header>
+        <a href="/"><img src="static/imgs/logo.png" alt="Logo TRVL" class="logo"></a>
+        <div class="user-info">
+            <H1> <h2>Usuários Cadastrados</h2></H1>
+        </div>
+    </header>
+    <hr>
+<div class="container mt-5">
+    <h2>Usuários Cadastrados</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Nome</th>
+                <th>Senha</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario[0] }}</td>
+                <td>{{ usuario[1] }}</td>
+                <td>{{ usuario[2] }}</td>
+                <td>
+                <form action = "{{ url_for ('excluir_usuario') }}" method = "POST">
+                    <input type = "hidden" name = "usuario_id" value = "{{ usuario[0] }}">
+                    <button type = "submit" class = "btn btn-danger">Excluir</button>
+                </form>
+            </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/" class="btn btn-primary">Voltar ao Cadastro</a>
+</div>
+
+</body>
+</html>

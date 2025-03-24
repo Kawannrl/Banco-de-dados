@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRVL Destinos</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=1.0">
+
+</head>
+<body>
+    <header>
+        <a href="/"><img src="static/imgs/logo.png" alt="Logo TRVL" class="logo"></a>
+        <div class="header">
+            <h1>Assistente de viagens</h1>
+        </div>
+    </header>
+    <hr>
+    <main>
+        
+        <div class="destination-selection">
+            <h2>Qual seu destino?</h2>
+            <button onclick="changeImage('rio')">Rio de Janeiro</button>
+            <button onclick="changeImage('sao')">São Paulo</button>
+            <button onclick="changeImage('gramado')" class="active">Gramado</button>
+            <button onclick="changeImage('belo')">Belo Horizonte</button>
+            <button onclick="changeImage('curitiba')">Curitiba</button>
+        </div>
+        <div class="destination-image" id="destination-image">
+            <h1 id="destination-title">Gramado</h1>
+        </div>
+    
+    </main>
+    <script src="static/script.js"></script>
+</body>
+</html>

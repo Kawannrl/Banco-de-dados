@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=1.0">
+
+</head>
+
+<body>
+    <header>
+        <a href="/"><img src="static/imgs/logo.png" alt="Logo TRVL" class="logo"></a>
+        <div class="user-info">
+            <H1><h1>Bem-vindo, {{ usuario }}!</h1></H1>
+        </div>
+    </header>
+    <hr>
+    <div class="container mt-5">
+        <h2> Acompanhamento de Viagem</h2>
+        <div class="row">
+            {% for viagem in viagens %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+            
+                    {% if viagem[3] is not none and viagem[3] != '' %}
+                    <img src="{{ viagem[3] }}" class="card-img-top" alt="Imagem da Viagem">
+                {% else %}
+                    <img src="{{ url_for('static', filename='img/no-image.jpeg') }}" class="card-img-top" alt="Imagem Padrão">
+                {% endif %}
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ viagem[0] }}</h5>
+                        <p class="card-text">Data Prevista: {{ viagem[1] }}</p>
+                        <p class="card-text">Status: {{ viagem[2] }}</p>
+                        
+                        <form action = "{{ url_for ('excluir_viagem') }}" method = "POST">
+                            <input type = "hidden" name = "viagem_id" value = "{{ viagem[4] }}">
+                            <button type = "submit" class = "btn btn-danger">Excluir</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <p>Nenhuma viagem encontrada.</p>
+            {% endfor %}
+
+        </div>
+    </div>
+    <div class="fileira">
+        <a href="/nova" class="btn btn-primary">Nova Viagem</a>
+        <a href="{{ url_for('logout') }}" class="logout">Sair</a>
+    </div>
+</body>
+
+</html>

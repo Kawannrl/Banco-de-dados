@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", serif;
+    font-weight: 400;
+}
+
+body {
+    background-color: #154f35;
+    color: #fefefe;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #154f35;
+}
+
+.logo {
+    height: 150px; 
+}
+
+.user-info h1,h2 {
+    display: flex;
+    align-items: center;
+    padding: 10px
+    font-family: "Baskervville", serif;
+}
+
+.user-info p {
+    margin-right: 10px;
+}
+
+.user-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    gap: 40px;
+}
+
+.destination-selection {
+    background-color: #e8dfca;
+    padding: 80px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.destination-selection h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.destination-selection button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #4a7a5c;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.destination-selection button:hover,
+.destination-selection button.active {
+    background-color: #2f6144;
+}
+
+.destination-image {
+    width: 300px;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+}
+
+.destination-image h1 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Default image for Gramado */
+#destination-image {
+    background-image: url('static/imgs/gramado.jpg');
+}
+
+cadastro#body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+}
+.form-container {
+    background-color: #e8dfca;
+    padding: 30px;
+    margin: 5%;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.header hr{
+    size: 30px;
+    margin-top: 0px;
+    border-top: 1px solid #e8dfca;
+}
+
+.header h1 {
+    text-align: center;
+    margin-top: 60px;
+    font-family: "Baskervville", serif;
+}
+
+.form-group {
+    color: #2f6144;
+}
+
+body {
+/* Carregar a fonte Baskerville do Google Fonts */
+
+
+    font-family: 'Baskerville', serif;
+}
+
+.btn-primary {
+    background-color: #e8dfca;
+    border-color: #e8dfca;
+    color: #154f35;
+    margin-right: 35px;
+}
+.botoes {
+    display: flex;
+    
+}
+
+.botoes .primario {
+    text-decoration: none;
+    color: #f5efe6;
+    border-radius: 35%;
+    padding: 25px;
+    margin-right: 25px;
+    
+}
+.botoes .secundario {
+    background-color: #f5efe6;
+    text-decoration: none;
+    color: #154f35;
+    border-radius: 35%;
+    padding: 20px;
+    font-size: 1.5rem;
+}
+
+.text-index button{
+    background-color: #f5efe6;
+    border-color: #1a4d2e;
+    padding: 20px;
+    border-radius: 45px;
+}
+
+.praia {
+    width: 90%; 
+    height: auto;
+    margin: 0 auto; 
+    display: block; 
+    object-fit: cover; 
+    filter: blur(3px); 
+    opacity: 0.7; /* Torna a imagem um pouco translúcida para destacar o texto */
+    border-radius: 10px; /* Adiciona bordas arredondadas à imagem */
+}
+
+.text-index {
+    position: absolute;
+    top: 80%; /* Centraliza verticalmente */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta o ponto de origem para o centro */
+    text-align: center;
+    color: white; /* Texto branco para contraste */
+    z-index: 2; /* Garante que o texto fique acima da imagem */
+}
+
+.form-group label {
+    color: #1a4d2e;
+}
+
+hr { 
+    border-top: 1px solid #e8dfca;
+
+}
+
+.container {
+    background-color: #e8dfca;
+    border-radius: 35px;
+    padding: 20px;
+}
+
+.container h2 {
+    color: #1a4d2e;
+}
+
+.logout {
+    background-color: #e8dfca;
+    color: #1a4d2e;
+    padding: 20px;
+    border-radius: 25px;
+    margin-right: 30px;
+}
+
+.fileira { 
+    margin-top: 80px;
+    text-align: right;
+    margin-bottom: 60px;
+    
+}
+
+.card-body{
+    color: #154f35;
+}
