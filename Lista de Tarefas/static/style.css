@@ -42,3 +42,18 @@ div.lado-direito a {
     text-align: center; /*Centraliza p texto no centro*/
     border-radius: 30px; /*Arredonda a borda da imagem*/
 }
+
+body.cadastro {
+    background-color: #2e5c91ff;
+}
+
+div.formulario {
+    display: flex;
+    text-align: center;
+    background-color: #e7e5deff;
+    color: #092340;
+    font-size: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    flex-direction: column;
+    border-radius: 25px;
+}
