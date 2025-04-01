@@ -48,12 +48,55 @@ body.cadastro {
 }
 
 div.formulario {
-    display: flex;
     text-align: center;
     background-color: #e7e5deff;
     color: #092340;
     font-size: 20px;
     font-family: 'Segoe UI', sans-serif;
-    flex-direction: column;
     border-radius: 25px;
+    width: 25%;
+    padding: 30px;
+    margin-left: 36%;
+    margin-top: 16%;
+}
+
+body.login {
+    background-color: #2e5c91ff;
+}
+
+div.formulario2 {
+    text-align: center;
+    background-color: #e7e5deff;
+    color: #092340;
+    font-size: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    border-radius: 25px;
+    width: 25%;
+    padding: 30px;
+    margin-left: 36%;
+    margin-top: 16%;
+}
+
+body.lista {
+    background-color: #2e5c91ff;
+}
+
+.subtitulo {
+    color: #092340;
+    font-size: 50px;
+    font-family: 'Segoe UI', sans-serif;
+    margin-left: 40px;
+}
+
+div.formulario3 {
+    text-align: center;
+    background-color: #e7e5deff;
+    color: #092340;
+    font-size: 25px;
+    font-family: 'Segoe UI', sans-serif;
+    border-radius: 25px;
+    width: 25%;
+    padding: 30px;
+    margin-left: 36%;
+    margin-top: 16%;
 }
