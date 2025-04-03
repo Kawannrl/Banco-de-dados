@@ -100,3 +100,10 @@ div.formulario3 {
     margin-left: 36%;
     margin-top: 16%;
 }
+
+button.btn {
+    border-radius: 5px;
+    border: 0;
+    color: white;
+    background-color: #2e5c91ff;
+}

@@ -9,7 +9,7 @@ def criar_tabelas ():
     conexao = conectar_banco ()
     cursor = conexao.cursor ()
     cursor.execute ('''create table if not exists usuarios (email text primary key, nome text, senha text)''')
-    cursor.execute ('''create table if not exists tarefas (id integer primary key, conteudo text, esta_concluida integer, email_usuario text, foreign key(email_usuarios) references usuarios(email))''')
+    cursor.execute ('''create table if not exists tarefas (id integer primary key, conteudo text, esta_concluida integer, email_usuario text, foreign key(email_usuario) references usuarios(email))''')
     conexao.commit ()
 
 def criar_usuario (formulario):
@@ -47,6 +47,22 @@ def fazer_login (formulario):
         senha_criptografada = cursor.fetchone ()
         resultado_verificacao = check_password_hash (senha_criptografada [0], formulario ['senha'])
         return resultado_verificacao
+    
+def adicionar_tarefa (formulario, email_usuario):
+    conexao = conectar_banco ()
+    cursor = conexao.cursor ()
+    conteudo = (formulario ['tarefa'])
+    cursor.execute ('''insert into tarefas (conteudo, esta_concluida, email_usuario) values (?, ?, ?)''', (conteudo, 0, email_usuario))
+    conexao.commit ()
+    return True
+
+def buscar_tarefas (email):
+    conexao = conectar_banco ()
+    cursor = conexao.cursor ()
+    cursor.execute ("select id, conteudo, esta_concluida from tarefas where email_usuario = ?", (email,))
+    tarefas = cursor.fetchall ()
+    return tarefas
+    
 
 if __name__ == "__main__":
     criar_tabelas ()

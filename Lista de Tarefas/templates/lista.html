@@ -12,10 +12,12 @@
     <div class = "formulario3">
         <form action ="/lista" method = "POST">
             <label for = "senha">Adicionar Tarefa</label>
-            <input type = "text" id = "tarefa" name = "tarefa" required>
+            <input type = "text" id = "tarefa" name = "tarefa" placeholder = "O que precisa ser feito?" required>
             <button type = "submit" class = "btn">+</button>
-            
         </form>
     </div>
+
+    {% for tarefa in tarefas %}
+    <p>{{ tarefa }}</p>
 </body>
 </html>

@@ -34,11 +34,22 @@ def cadastro ():
     else:
         return render_template ('cadastro.html')
     
-@app.route ('/lista')
+@app.route ('/lista', methods = ["GET", "POST"])
 def lista ():
-    if 'usuario' not in session:
-        return redirect (url_for ('login'))
-    return render_template ('lista.html')
+    
+    if request.method == "POST":
+        form = request.form
+        
+        if database.adicionar_tarefa (form, session ['usuario']) == True:
+            return render_template ('lista.html')
+        else:
+            return "Ocorreu um erro ao adicionar um item a lista"
+    else:
+        if 'usuario' not in session:
+            return redirect (url_for ('login'))
+        tarefas = database.buscar_tarefas (session ['usuario'])
+        print (tarefas)
+        return render_template ('lista.html', usuario = session ['usuario'], tarefas = tarefas)
 
 if __name__ == '__main__':
     app.run (debug = True)
