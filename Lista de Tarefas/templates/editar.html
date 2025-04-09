@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = "/static/style.css">
+    <title>Editar Tarefa</title>
+</head>
+<body class = "lista">
+    <h1>Editar Tarefa</h1>
+    <h2 class = "subtitulo"> Minhas Tarefas</h2>
+    <div class = "formulario3">
+        <form action ="/tarefas/editar/{{id}}" method = "POST">
+            <label for = "senha">Editar Tarefa</label>
+            <input type = "text" id = "tarefa" name = "tarefa" placeholder = "O que precisa ser feito?"  value = "{{tarefa}}" required>
+            <button type = "submit" class = "btn">+</button>
+        </form>
+    </div>
+</body>
+</html>

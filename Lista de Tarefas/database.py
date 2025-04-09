@@ -32,7 +32,6 @@ def fazer_login (formulario):
     conexao = conectar_banco ()
     cursor = conexao.cursor ()
     cursor.execute ('''select count (email) from usuarios where email = ?''', (formulario ['email'],))
-    conexao.commit ()
 
     quantidade_de_email = cursor.fetchone ()
     print (quantidade_de_email)
@@ -41,9 +40,7 @@ def fazer_login (formulario):
         return False
     
     else:
-        cursor = conexao.cursor ()
         cursor.execute ('''select senha from usuarios where email = ?''', (formulario ['email'],))
-        conexao.commit ()
         senha_criptografada = cursor.fetchone ()
         resultado_verificacao = check_password_hash (senha_criptografada [0], formulario ['senha'])
         return resultado_verificacao
@@ -60,9 +57,56 @@ def buscar_tarefas (email):
     conexao = conectar_banco ()
     cursor = conexao.cursor ()
     cursor.execute ("select id, conteudo, esta_concluida from tarefas where email_usuario = ?", (email,))
+    conexao.commit ()
     tarefas = cursor.fetchall ()
     return tarefas
+
+def tarefa_concluida (id):
+    conexao = conectar_banco ()
+    cursor = conexao.cursor ()
+    cursor.execute (''' select esta_concluida from tarefas where id = ?''',(id,))
+    esta_concluida = cursor.fetchone ()
+    esta_concluida = esta_concluida [0]
+    print (esta_concluida)
     
+    if (esta_concluida):
+        esta_concluida = False
+    else:
+        esta_concluida = True
+        
+    cursor.execute ('''update tarefas set esta_concluida = ? where id = ?''', (esta_concluida, id))
+    conexao.commit ()
+    return True
+
+def tarefa_excluir (id):
+    conexao = conectar_banco ()
+    cursor = conexao.cursor ()
+    cursor.execute ('''delete from tarefas where id = ?''', (id,))
+    conexao.commit ()
+    return True
+
+def excluir_usuario (email):
+    conexao = conectar_banco ()
+    cursor = conexao.cursor ()
+    cursor.execute ('''delete from usuarios where email_usuario = ?''', (email,))
+    cursor.execute ('''delete from usuarios where email = ?''', (email,))
+    conexao.commit ()
+    return True
+
+def buscar_conteudo_tarefa (id):
+    conexao = conectar_banco ()
+    cursor = conexao.cursor ()
+    cursor.execute ('''select conteudo from tarefas where id = ?''', (id,))
+    conexao.commit ()
+    conteudo = cursor.fetchone ()
+    return (conteudo [0])
+
+def editar_tarefa (novo_conteudo, id):
+    conexao = conectar_banco ()
+    cursor = conexao.cursor ()
+    cursor.execute ('''update tarefas set conteudo = ? where id = ?''', (novo_conteudo, id))
+    conexao.commit ()
+    return True
 
 if __name__ == "__main__":
     criar_tabelas ()

@@ -18,6 +18,17 @@
     </div>
 
     {% for tarefa in tarefas %}
-    <p>{{ tarefa }}</p>
+    <label class = "checkbox">
+        <input type = "checkbox" {{ "checked" if tarefa[2] else "" }}
+        onclick = "window.location.href='/tarefas/atualizar/{{ tarefa [0] }}'">
+        {{ tarefa [1] }}  
+        <button class = "acao-btn" onclick = "window.location.href='/tarefas/editar/{{ tarefa [0] }}'">Editar</button>
+        <button class = "acao-btn excluir" onclick = "if(confirm('Tem certeza que deseja excluir esta tarefa?')) window.location.href='/tarefas/excluir/{{ tarefa [0] }}'">Excluir</button>
+    </label>
+    <hr/>
+    {% endfor %}
+
+    <input type = "button"
+    onclick = "window.location.href='/excluir_usuario'" value="Excluir usuário">
 </body>
 </html>

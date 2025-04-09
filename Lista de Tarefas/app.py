@@ -51,5 +51,42 @@ def lista ():
         print (tarefas)
         return render_template ('lista.html', usuario = session ['usuario'], tarefas = tarefas)
 
+@app.route ('/tarefas/atualizar/<int:id>', methods = ['GET'])
+def tarefa_concluida (id):
+    if database.tarefa_concluida (id):
+        return redirect (url_for ('lista'))
+    else:
+        return "Ocorreu um erro ao marcar a tarefa como concluída"
+
+@app.route ('/tarefas/excluir/<int:id>', methods = ['GET'])
+def tarefa_excluir (id):
+    if database.tarefa_excluir (id):
+        return redirect (url_for ('lista'))
+    else:
+        return "Ocorreu um erro ao excluir a tarefa"
+
+@app.route ('/excluir_usuario')
+def excluir_usuario ():
+    email = session ['usuario']
+    
+    if database.excluir_usuario (email):
+        return redirect (url_for ('hello'))
+    else:
+        return "Ocorreu um erro ao excluir o usuário"
+    
+@app.route ('/tarefas/editar/<int:id>', methods = ['GET', "POST"])
+def editar_tarefa (id):
+    
+    email = session ['usuario']
+    if (request.method == "GET"):
+        conteudo_tarefa = database.buscar_conteudo_tarefa (id)
+        return (render_template ("editar.html", tarefa = conteudo_tarefa, id = id))
+    
+    if (request.method == "POST"):
+        form = request.form
+        novo_conteudo = form ['tarefa']
+        database.editar_tarefa (novo_conteudo, id)
+        return redirect (url_for ('lista'))
+
 if __name__ == '__main__':
     app.run (debug = True)
