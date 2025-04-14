@@ -10,10 +10,6 @@ app.secret_key = "chave_muito_segura"
 def index ():
     return render_template ('index.html')
 
-@app.route ('/home')
-def home ():
-    return render_template ('home.html')
-
 @app.route ('/cadastro') #rota para a página de login
 def cadastro ():
     return render_template ('cadastro.html')
@@ -43,18 +39,39 @@ def login ():
         senha = form ["senha"]
         
         if database.fazer_login (email, senha) == True:
-            session ['nome'] = (email,)
+            session ['nome'] = (email)
             return redirect (url_for ('home'))
         else:
             return ("Ocorreu um erro ao  fazer login!")
     else:
         return render_template ('login.html')
     
-@app ('/home', methods = ["GET", "POST"])
-def nova_musica ():
-    if request.method == "POST":
-        pass
+@app.route ('/home')
+def home ():
+    if 'nome' not in session:
+        return (url_for ('login'))
+    
+    musicas = database.buscar_musica (session ['nome'])
+    return render_template ('home.html', nome = session ['nome'], musicas = musicas)
 
+@app.route ('/novo', methods = ["GET", "POST"])
+def nova_musica ():
+    if 'nome' not in session:
+        return (url_for ('login'))
+    
+    if request.method == "POST":
+        form = request.form
+        musica_nome = form ['musica_nome']
+        artista = form ['artista']
+        status = form ['status']
+        imagem = form ['imagem']
+        letra = form ['letra']
+        id_usuario = session ['nome']
+        database.criar_musica (id_usuario, musica_nome, artista, status, imagem, letra)
+        flash ("Música criada com sucesso", "success")
+        return redirect (url_for ('home'))
+    return render_template ('nova_musica.html')
+    
 # parte principal do
 if __name__ == '__main__':
     app.run (debug = True)

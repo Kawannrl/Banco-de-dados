@@ -53,6 +53,16 @@ a.botao-secundario {
     font-weight: 700;
 }
 
+button.sla {
+    text-decoration: none; /*Remover o sublinhado dos botões*/
+    background-color: #a684d2; /*alterando a cor do fundo*/
+    font-size: 20px; /*Alterando o tamanho da fonte*/
+    color: #530068; /*mudar a cor do texto*/
+    padding: 10px; /*adicionar um espaço em volta texto*/
+    border-radius: 10px;
+    border: none; /* LINHA NOVA*/
+}
+
 /* novo estilo*/
 .botoes button {
     text-decoration: none; /*Remover o sublinhado dos botões*/

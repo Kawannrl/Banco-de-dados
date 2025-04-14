@@ -43,6 +43,20 @@ def fazer_login (email, senha):
         verificar_senha = check_password_hash (senha_criptografada [0], senha)
         return verificar_senha
     
+def buscar_musica (id_usuario):
+    conexao = conectar_banco ()
+    cursor = conexao.cursor ()
+    cursor.execute ('''select musica_nome, artista, status, imagem, letra from musicas where id_usuario = ?''', (id_usuario,))
+    musicas = cursor.fetchall ()
+    return musicas
+    
+def criar_musica (id_usuario, musica_nome, artista, status, imagem, letra):
+    conexao = conectar_banco ()
+    cursor = conexao.cursor ()
+    cursor.execute ('''insert into musicas (id_usuario, musica_nome, artista, status, imagem, letra) values (?, ?, ?, ?, ?, ?)''', (id_usuario, musica_nome, artista, status, imagem, letra))
+    conexao.commit ()
+    return True
+    
 def apagar_usuario (email):
     conexao = conectar_banco ()
     cursor = conexao.cursor ()
