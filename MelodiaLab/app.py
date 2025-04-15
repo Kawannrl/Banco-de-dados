@@ -71,7 +71,28 @@ def nova_musica ():
         flash ("Música criada com sucesso", "success")
         return redirect (url_for ('home'))
     return render_template ('nova_musica.html')
+
+@app.route('/home/apagar-musica/<int:id>', methods=['GET'])
+def apagar_musica (id):
     
+    if database.apagar_musica (id):
+        return redirect (url_for ('home'))
+    else:
+        return "Algo deu errado"
+    
+@app.route ('/home/editar_musica/<int:id>', methods = ['GET', "POST"])
+def editar_musica (id):
+    
+    if (request.method == "GET"):
+        musicas = database.buscar_musica_por_id (id)
+        return (render_template ("editar.html", musicas = musicas, id = id))
+    
+    if (request.method == "POST"):
+        form = request.form
+        novo_conteudo = form ['musica']
+        database.editar_musica (novo_conteudo, id)
+        return redirect (url_for ('home'))
+
 # parte principal do
 if __name__ == '__main__':
     app.run (debug = True)

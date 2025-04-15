@@ -46,7 +46,7 @@ def fazer_login (email, senha):
 def buscar_musica (id_usuario):
     conexao = conectar_banco ()
     cursor = conexao.cursor ()
-    cursor.execute ('''select musica_nome, artista, status, imagem, letra from musicas where id_usuario = ?''', (id_usuario,))
+    cursor.execute ('''select musica_nome, artista, status, imagem, letra, id from musicas where id_usuario = ?''', (id_usuario,))
     musicas = cursor.fetchall ()
     return musicas
     
@@ -56,6 +56,29 @@ def criar_musica (id_usuario, musica_nome, artista, status, imagem, letra):
     cursor.execute ('''insert into musicas (id_usuario, musica_nome, artista, status, imagem, letra) values (?, ?, ?, ?, ?, ?)''', (id_usuario, musica_nome, artista, status, imagem, letra))
     conexao.commit ()
     return True
+
+def editar_musica (id_usuario, musica_nome, artista, status, imagem, letra):
+    conexao = conectar_banco ()
+    cursor = conexao.cursor ()
+    cursor.execute ('''update musicas set id_usuario = ?, musica_nome = ?, artista = ?, status = ?, imagem = ?, letra = ? where id_usuario = ?''', (id_usuario, musica_nome, artista, status, imagem, letra))
+    conexao.commit ()
+    musicas = cursor.fetchall ()
+    return musicas
+
+def apagar_musica (id):
+    conexao = conectar_banco ()
+    cursor = conexao.cursor ()
+    cursor.execute ('''delete from musicas where id = ?''', (id,))
+    conexao.commit ()
+    return True
+
+def mostrar_id_musica (id_email):
+    conexao = conectar_banco ()
+    cursor = conexao.cursor ()
+    cursor.execute ('''select * from musicas where email = ?''', (id_email,))
+    conexao.commit ()
+    musicas = cursor.fetchall ()
+    return musicas
     
 def apagar_usuario (email):
     conexao = conectar_banco ()
@@ -63,6 +86,13 @@ def apagar_usuario (email):
     cursor.execute ('''delete from usuarios where email = ?''', (email,))
     cursor.execute ('''delete from musicas where email = ?''', (email,))
     conexao.commit ()
+    
+def buscar_musica_por_id (musica_id):
+    conexao = conectar_banco ()
+    cursor = conexao.cursor ()
+    cursor.execute ('''select musica_nome, artista, status, imagem, letra, id from musicas where id = ?''', (musica_id,))
+    musicas = cursor.fetchone ()
+    return musicas
         
 
 # PARTE PRINCIPAL DO PROGRAMA

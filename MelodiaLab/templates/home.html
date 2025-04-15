@@ -1,46 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-<link rel="stylesheet" href="static/estilo.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="static/estilo.css">
 </head>
+
 <body id="home">
-    <img id="logo-home" src="/static/img/Logo texto.png">
-   
-    <div class="botoes">
-        <a href="/novo"> + Criar uma música</a>
-    </div>
-    
-      <!-- Seção de "Minhas Criações" -->
-      <section class="my-creations">
-        <h2>Minhas Criações</h2>
-        <div class="cards-container">
-          <!-- Card de projeto musical -->
-          <div class="card">
-            <img src="/static/img/capa1.jpeg" alt="Capa do Projeto" class="cover">
-            <div class="card-content">
-              <h3>Nome da Música</h3>
-              <p>Artista: Seu Nome</p>
-              <p>Status: Em composição</p>
-              <p>Letra: Viciado em adrenalina, só sinto amor quando a gente briga...</p>
-            </div>
+  <img id="logo-home" src="/static/img/Logo texto.png">
+
+  <div class="botoes">
+    <a href="/novo"> + Criar uma música</a>
+  </div>
+
+  <!-- Seção de "Minhas Criações" -->
+  <section class="my-creations">
+    <h2>Minhas Criações</h2>
+    <div class="cards-container">
+      {% for musica in musicas %}
+      <div class="cards-container">
+        <div class="card mb-4">
+
+          {% if musica[3] is not none and musica[3] != '' %}
+          <img src="{{ musica[3] }}" class="card-img-top" alt="Capa da Música">
+          {% else %}
+          <img src="{{ url_for('static', filename='img/no-image.jpeg') }}" class="cover" alt="Imagem Padrão">
+          {% endif %}
+
+          <div class="card-content">
+            <h5 class="card-text">Música: {{ musica [0] }}</h5>
+            <p class="card-text">Artista: {{ musica [1] }}</p>
+            <p class="card-text">Status: {{ musica [2] }}</p>
+            <p class="card-text">Letra: {{ musica [4] }}</p>
+
+            
+            <input type="button" onclick="window.location.href='/home/apagar-musica/{{musica [5]}}'" class = "btn btn-danger" value="apagar-musica">
+            <input type="button" onclick="window.location.href='/home/editar_musica/{{musica [5]}}'" class = "btn btn-danger" value="editar_musica">
+            
           </div>
-  
-          <div class="card">
-            <img src="/static/img/capa2.jpeg" alt="Capa do Projeto" class="cover">
-            <div class="card-content">
-              <h3>Outra Música</h3>
-              <p>Artista: Seu Nome</p>
-              <p>Status: Em gravação</p>
-              <p>Letra: Eu te levei para meu templo, vulnerável com meus sentimentos...</p>
-            </div>
-          </div>
-  
-          <!-- Mais cards podem ser adicionados aqui -->
         </div>
-      </section>
+      </div>
+      {% else %}
+      <p>Nenhuma viagem encontrada.</p>
+      {% endfor %}
+      <!-- Mais cards podem ser adicionados aqui -->
+    </div>
+  </section>
 
 </body>
+
 </html>

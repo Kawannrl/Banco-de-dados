@@ -135,7 +135,6 @@ body#home {
 .card {
     display: flex;
     width: 400px;
-    height: 200px;
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -175,4 +174,24 @@ body#home {
 .card-content p {
     font-size: 14px;
     color: #666;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+}
+
+form.form_nova {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+}
+
+div.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
