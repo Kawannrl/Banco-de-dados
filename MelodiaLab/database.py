@@ -57,10 +57,10 @@ def criar_musica (id_usuario, musica_nome, artista, status, imagem, letra):
     conexao.commit ()
     return True
 
-def editar_musica (id_usuario, musica_nome, artista, status, imagem, letra):
+def editar_musica (id, musica_nome, artista, status, imagem, letra):
     conexao = conectar_banco ()
     cursor = conexao.cursor ()
-    cursor.execute ('''update musicas set id_usuario = ?, musica_nome = ?, artista = ?, status = ?, imagem = ?, letra = ? where id_usuario = ?''', (id_usuario, musica_nome, artista, status, imagem, letra))
+    cursor.execute ('''update musicas set musica_nome = ?, artista = ?, status = ?, imagem = ?, letra = ? where id = ?''', (id, musica_nome, artista, status, imagem, letra))
     conexao.commit ()
     musicas = cursor.fetchall ()
     return musicas

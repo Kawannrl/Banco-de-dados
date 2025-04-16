@@ -1,0 +1,59 @@
+/* Reset básico de margin e padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .container {
+    text-align: center;
+    background-color: rgba(50, 50, 50, 0.8);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+  }
+  
+  h1 {
+    color: #9b59b6; /* Roxo */
+    font-size: 36px;
+    margin-bottom: 30px;
+  }
+  
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .btn {
+    background-color: #9b59b6; /* Roxo */
+    color: white;
+    font-size: 18px;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 200px;
+  }
+  
+  .btn:hover {
+    background-color: #8e44ad; /* Roxo escuro */
+  }
+  
+  .btn:active {
+    background-color: #732d91; /* Roxo mais escuro */
+  }
+  

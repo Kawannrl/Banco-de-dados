@@ -89,8 +89,13 @@ def editar_musica (id):
     
     if (request.method == "POST"):
         form = request.form
-        novo_conteudo = form ['musica']
-        database.editar_musica (novo_conteudo, id)
+        musica_nome = form ['musica_nome']
+        artista = form ['artista']
+        status = form ['status']
+        imagem = form ['imagem']
+        letra = form ['letra']
+        print(form)
+        database.editar_musica (musica_nome, artista, status, imagem, letra, id)
         return redirect (url_for ('home'))
 
 # parte principal do
