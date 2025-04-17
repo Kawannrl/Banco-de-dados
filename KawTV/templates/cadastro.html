@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastro - Ouriço TV</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Crie sua conta</h1>
+
+    <form id="signup-form" class="active" action="/confirmar-cadastro">
+      <input type="text" placeholder="Nome completo" name="nome" required />
+      <input type="email" placeholder="Email" name="email" required />
+      <input type="password" placeholder="Senha" name="senha" required />
+      <input type="password" placeholder="Confirme a senha" name="confirmar_senha" required />
+      <button type="submit" class="submit-btn">Cadastrar</button>
+    </form>
+
+    <p style="text-align: center; margin-top: 1rem; color: #aaa;">
+      Já tem uma conta?
+      <a href="/login" style="color: #bb86fc; text-decoration: none;">Entrar</a>
+    </p>
+  </div>
+</body>
+</html>
