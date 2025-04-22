@@ -17,7 +17,7 @@ def cadastrar ():
     if request.method == "POST":
         form = request.form
         
-        if database.criar_usuario (form) == True:
+        if database.criar_usuario (form ['email'], form ['nome'], form ['senha']) == True:
             return render_template ('login.html')
         else:
             return ("Ocorreu um erro ao cadastrar o usuário!")
@@ -40,5 +40,35 @@ def login ():
     else:
         return render_template ('login.html')
     
+@app.route ('/home')
+def home ():
+    if 'nome' not in session:
+        return (url_for ('login'))
+    
+    filmes = database.buscar_filme (session ['nome'])
+    return render_template ('home.html', nome = session ['nome'], filmes = filmes)
+
+@app.route ('/novo', methods = ["GET", "POST"])
+def novo_filme ():
+    if 'nome' not in session:
+        return (url_for ('login'))
+    
+    if request.method == "POST":
+        form = request.form
+        titulo = form ['titulo']
+        estilo = form ['estilo']
+        ano = form ['ano']
+        descricao = form ['descricao']
+        imagem = form ['imagem']
+        id_usuario = session ['nome']
+        database.adicionar_filme (id_usuario, titulo, estilo, ano, descricao, imagem)
+        flash ("Filme adicionado com sucesso", "success")
+        return redirect (url_for ('home'))
+    return render_template ('novo_filme.html')
+
+@app.route ('/filmes', methods = ['GET'])
+def mostrar_filmes ():
+    pass
+
 if __name__ == '__main__':
     app.run (debug = True)
