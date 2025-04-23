@@ -1,52 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ouriço TV - Home</title>
-  <link rel="stylesheet" href="/static/style.css" />
+    <meta charset="UTF-8">
+    <title>Catálogo de Filmes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <div class="container">
-    <h1>Adicionar Filme</h1>
+    <div class="container">
+        <h1 class="boas-vindas">🎬 Bem-vindo, {{ nome }}!</h1>
 
-    <form id="add-movie-form" class="active">
-      <input type="text" name="imagem" placeholder="URL da imagem" required>
-      <input type="text" name="titulo" placeholder="Título do filme" required />
-      <input type="text" name="genero" placeholder="Gênero" required />
-      <input type="text" name="ano" placeholder="Ano de lançamento" required />
-      <textarea name="descricao" placeholder="Descrição" rows="4" required></textarea>
-      <button type="submit" class="submit-btn">Adicionar</button>
-    </form>
-    <a href="/filmes">
-  
-      <button  class="submit-btn">Ver Filmes</button>
-    </a>
-  </div>
+        <!-- Botões de Ação -->
+        <div class="acoes">
+            <a href="{{ url_for('novo_filme') }}">
+                <button class="submit-btn">Adicionar Novo Filme</button>
+            </a>
+            <a href="{{ url_for('logout') }}">
+                <button class="submit-btn">Logout</button>
+            </a>
+        </div>
 
-  <script>
-    const form = document.getElementById('add-movie-form');
-    const lista = document.getElementById('lista-filmes');
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const titulo = form.titulo.value;
-      const genero = form.genero.value;
-      const ano = form.ano.value;
-      const descricao = form.descricao.value;
-
-      const item = document.createElement('li');
-      item.style.marginBottom = '1rem';
-      item.innerHTML = `
-        <strong>${titulo}</strong> (${ano})<br/>
-        <em>${genero}</em><br/>
-        <p style="color:#ccc; margin-top:0.2rem;">${descricao}</p>
-      `;
-
-      lista.appendChild(item);
-      form.reset();
-    });
-  </script>
+        <!-- Exibição do Catálogo -->
+        <div class="catalogo">
+            {% for filme in filmes %}
+                <div class="filme">
+                    <img src="{{ filme[4] }}" alt="Capa de {{ filme[0] }}">
+                    <h3>{{ filme[0] }}</h3>
+                    <p>{{ filme[1] }} | {{ filme[2] }}</p>
+                    <p>{{ filme[3] }}</p>
+                
+                    <button class="submit-btn" onclick="window.location.href='/apagar_filme/{{filme[5]}}'">Excluir</button>
+                    <button class="submit-btn" onclick="window.location.href='/editar_filme/{{filme[5]}}'">Editar</button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 </html>

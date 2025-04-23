@@ -41,22 +41,54 @@ def fazer_login (email, senha):
     else:
         cursor.execute ('''select senha from usuarios where email = ?''', (email,))
         senha_criptografada = cursor.fetchone ()
-        print (senha_criptografada)
-        print (senha)
         verificar_senha = check_password_hash (senha_criptografada [0], senha)
         return verificar_senha
     
-def adicionar_filme (usuario_id, titulo, estilo, ano, descricao, imagem):
-    conexao = conectar_banco ()
-    cursor = conexao.cursor ()
-    cursor.execute ('''insert into filmes (usuario_id = ?, titulo = ?, estilo = ?, ano = ?, descricao = ?, imagem = ?) values (?, ?, ?, ?, ?, ?)''', (usuario_id, titulo, estilo, ano, descricao, imagem))
-    conexao.commit 
+def adicionar_filme(id_usuario, titulo, estilo, ano, descricao, imagem):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    cursor.execute('''
+        INSERT INTO filmes (id_usuario, titulo, estilo, ano, descricao, imagem)
+        VALUES (?, ?, ?, ?, ?, ?)
+    ''', (id_usuario, titulo, estilo, ano, descricao, imagem))
+    conexao.commit()
+    conexao.close()
     return True
 
 def buscar_filme (id_usuario):
     conexao = conectar_banco ()
     cursor = conexao.cursor ()
-    cursor.execute ('''select titulo, estilo, ano, descricao, imagem from filmes where id_usuario = ?''', (id_usuario,))
+    cursor.execute ('''select titulo, estilo, ano, descricao, imagem, id from filmes where id_usuario = ?''', (id_usuario,))
+    filmes = cursor.fetchall ()
+    return filmes
+
+def apagar_filme (id):
+    conexao = conectar_banco ()
+    cursor = conexao.cursor ()
+    cursor.execute ('''delete from filmes where id = ?''', (id,))
+    conexao.commit ()
+    return True
+
+def editar_filme (id, titulo, estilo, ano, descricao, imagem):
+    conexao = conectar_banco ()
+    cursor = conexao.cursor ()
+    cursor.execute ('''update filmes set titulo = ?, estilo = ?, ano = ?, descricao = ?, imagem = ? where id = ?''', (id, titulo, estilo, ano, descricao, imagem))
+    conexao.commit ()
+    filmes = cursor.fetchall ()
+    return filmes
+
+def buscar_filme_por_id (id):
+    conexao = conectar_banco ()
+    cursor = conexao.cursor ()
+    cursor.execute ('''select id, titulo, estilo, ano, descricao, imagem from filmes where id = ?''', (id,))
+    filmes = cursor.fetchone ()
+    return filmes
+
+def mostrar_id_filme (id_email):
+    conexao = conectar_banco ()
+    cursor = conexao.cursor ()
+    cursor.execute ('''select * from filmes where email = ?''', (id_email,))
+    conexao.commit ()
     filmes = cursor.fetchall ()
     return filmes
 

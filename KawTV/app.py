@@ -33,7 +33,7 @@ def login ():
         senha = form ["senha"]
         
         if database.fazer_login (email, senha) == True:
-            session ['nome'] = (email)
+            session ['nome'] = email
             return redirect (url_for ('home'))
         else:
             return ("Ocorreu um erro ao  fazer login!")
@@ -48,7 +48,7 @@ def home ():
     filmes = database.buscar_filme (session ['nome'])
     return render_template ('home.html', nome = session ['nome'], filmes = filmes)
 
-@app.route ('/novo', methods = ["GET", "POST"])
+@app.route ('/filmes', methods = ["GET", "POST"])
 def novo_filme ():
     if 'nome' not in session:
         return (url_for ('login'))
@@ -61,14 +61,43 @@ def novo_filme ():
         descricao = form ['descricao']
         imagem = form ['imagem']
         id_usuario = session ['nome']
-        database.adicionar_filme (id_usuario, titulo, estilo, ano, descricao, imagem)
-        flash ("Filme adicionado com sucesso", "success")
-        return redirect (url_for ('home'))
-    return render_template ('novo_filme.html')
+        if database.adicionar_filme (id_usuario, titulo, estilo, ano, descricao, imagem) == True:
+            flash ("Filme adicionado com sucesso", "success")
+            return redirect (url_for ('home'))
+    return render_template ('adicionar.html')
 
-@app.route ('/filmes', methods = ['GET'])
-def mostrar_filmes ():
-    pass
+@app.route ('/editar_filme/<int:id>', methods = ['GET', "POST"])
+def editar_musica (id):
+    
+    if (request.method == "GET"):
+        filmes = database.buscar_filme_por_id (id)
+        return (render_template ("editar.html", filmes = filmes, id = id))
+    
+    if (request.method == "POST"):
+        form = request.form
+        titulo = form ['titulo']
+        estilo = form ['estilo']
+        ano = form ['ano']
+        descricao = form ['descricao']
+        imagem = form ['imagem']
+        database.editar_filme (titulo, estilo, ano, descricao, imagem, id)
+        return redirect (url_for ('home'))
+
+@app.route('/apagar_filme/<int:id>')
+def apagar_filme (id):
+    
+    if database.apagar_filme (id) == True:
+        return redirect (url_for ('home'))
+    else:
+        return "Algo deu errado"
+
+@app.route('/logout')
+def logout():
+    
+    session.pop('nome', None)
+    flash('Você foi desconectado com sucesso!', 'success')
+    return redirect(url_for('login'))
+
 
 if __name__ == '__main__':
     app.run (debug = True)

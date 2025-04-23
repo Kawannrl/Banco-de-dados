@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ouriço TV - Adicionar Filme</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Adicionar Filme</h1>
+
+    <form method="POST" action="/filmes" class="active">
+      <input type="text" name="imagem" placeholder="URL da imagem" required />
+      <input type="text" name="titulo" placeholder="Título do filme" required />
+      <input type="text" name="estilo" placeholder="Gênero" required />
+      <input type="text" name="ano" placeholder="Ano de lançamento" required />
+      <textarea name="descricao" placeholder="Descrição" rows="4" required></textarea>
+      <button type="submit" class="submit-btn">Adicionar</button>
+    </form>
+  </div>
+</body>
+</html>
