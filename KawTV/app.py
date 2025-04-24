@@ -20,7 +20,8 @@ def cadastrar ():
         if database.criar_usuario (form ['email'], form ['nome'], form ['senha']) == True:
             return render_template ('login.html')
         else:
-            return ("Ocorreu um erro ao cadastrar o usuário!")
+            flash ('Ocorreu um erro ao fazer o cadastro!', 'error')
+            return redirect (url_for('cadastrar'))
 
     return render_template ('cadastro.html')
     
@@ -36,7 +37,8 @@ def login ():
             session ['nome'] = email
             return redirect (url_for ('home'))
         else:
-            return ("Ocorreu um erro ao  fazer login!")
+            flash ('Ocorreu um erro ao fazer login!', 'error')
+            return redirect (url_for('login'))
     else:
         return render_template ('login.html')
     
@@ -67,7 +69,7 @@ def novo_filme ():
     return render_template ('adicionar.html')
 
 @app.route ('/editar_filme/<int:id>', methods = ['GET', "POST"])
-def editar_musica (id):
+def editar_filme (id):
     
     if (request.method == "GET"):
         filmes = database.buscar_filme_por_id (id)

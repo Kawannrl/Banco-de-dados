@@ -10,6 +10,16 @@
   <div class="container">
     <h1>Entrar</h1>
 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+              <ul>
+                  {% for category, message in messages %}
+                      <li class="flash {{ category }}">{{ message }}</li>
+                  {% endfor %}
+              </ul>
+          {% endif %}
+    {% endwith %}
+    
     <form id="login-form" method="POST" action="/login" class="active">
       <input type="email" placeholder="Email" name="email" required />
       <input type="password" placeholder="Senha" name="senha" required />

@@ -9,18 +9,18 @@
     <div class="container">
         <h1>Editar Filme</h1>
 
-        <form action="/editar_filme" method="POST" class="form_nova">
-            <input type="text" name="titulo" placeholder="Título do Filme" value="{{ filme[1] }}" required>
-            <input type="text" name="estilo" placeholder="Gênero" value="{{ filme[2] }}" required>
-            <input type="text" name="ano" placeholder="Ano de Lançamento" value="{{ filme[3] }}" required>
-            <textarea name="descricao" placeholder="Descrição" rows="4" required>{{ filme[4] }}</textarea>
-            <input type="text" name="imagem" placeholder="URL da Imagem" value="{{ filme[5] }}" required>
+        <form action="/editar_filme/{{id}}" method="POST" class="form_nova">
+            <input type="text" name="titulo" placeholder="Título do Filme" value="{{ filmes[1] }}" required>
+            <input type="text" name="estilo" placeholder="Gênero" value="{{ filmes[2] }}" required>
+            <input type="text" name="ano" placeholder="Ano de Lançamento" value="{{ filmes[3] }}" required>
+            <textarea name="descricao" placeholder="Descrição" rows="4" required>{{ filmes[4] }}</textarea>
+            <input type="text" name="imagem" placeholder="URL da Imagem" value="{{ filmes[5] }}" required>
 
             <button type="submit" class="submit-btn">Salvar Alterações</button>
         </form>
 
         <a href="{{ url_for('home') }}">
-            <button class="submit-btn">Voltar ao Catálogo</button>
+            <button type="submit" class="submit-btn">Voltar ao Catálogo</button>
         </a>
     </div>
 </body>

@@ -35,8 +35,8 @@ def fazer_login (email, senha):
     cursor.execute ('''select count (email) from usuarios where email = ?''', (email,))
     quantidade_de_email = cursor.fetchone ()
     
-    if (quantidade_de_email [0] < 0):
-        print ("LOG: Já existe esse email cadastrado no banco de dados!")
+    if (quantidade_de_email [0] <= 0):
+        print ("LOG: Não existe esse email cadastrado no banco de dados!")
         return False
     else:
         cursor.execute ('''select senha from usuarios where email = ?''', (email,))

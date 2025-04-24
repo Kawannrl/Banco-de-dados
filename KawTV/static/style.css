@@ -54,7 +54,7 @@ h1 {
 }
 
 form {
-  display: none;
+  display: flex;
   flex-direction: column;
 }
 
@@ -181,4 +181,23 @@ h1.boas-vindas {
 
 .submit-btn:hover {
   background-color: #a65de4;
+}
+
+.flash.success {
+  background-color: green;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.flash.error {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
 }
