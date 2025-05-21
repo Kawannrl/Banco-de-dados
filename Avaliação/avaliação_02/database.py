@@ -62,17 +62,25 @@ def registrar_emprestimo (livro, aluno, data_emprestimo, data_prevista, status):
     conexao.commit ()
     return True
 
-def atualizar_emprestimo (status):
+def atualizar_emprestimo (status, id):
     conexao = conectar_banco ()
     cursor = conexao.cursor ()
-    cursor.execute ("""update livros set status where id = ?""", (status))
+    cursor.execute ("""update livros set status where id = ?""", (status, id))
     conexao.commit ()
     return True
 
-def buscar_emprestimo ():
+def buscar_emprestimo (aluno):
     conexao = conectar_banco ()
     cursor = conexao.cursor ()
-    cursor.execute ("""select * from emprestimo where aluno = ?""")
+    cursor.execute ("""select * from emprestimo where aluno = ?""", (aluno,))
     emprestimos = cursor.fetchall ()
     print (emprestimos)
     return emprestimos
+
+def livros_atrasados ():
+    conexao = conectar_banco ()
+    cursor = conexao.cursor ()
+    cursor.execute ("""select * from emprestimo where status = pendente""")
+    emprestimos_atrasados = cursor.fetchall ()
+    print (emprestimos_atrasados)
+    return emprestimos_atrasados
